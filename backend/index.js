@@ -16,7 +16,7 @@ app.use(express.json());
 app.use("/api", bibleRoutes);
   
 
-app.get("/",(res,req)=>{
+app.get("/",(req,res)=>{
     res.json("hello world")
 })
 

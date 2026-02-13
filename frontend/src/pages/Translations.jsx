@@ -8,8 +8,10 @@ const Translations = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getTranslations().then((res) => setTranslations(res.data));
-  }, []);
+    getTranslations().then((res) => {
+      setTranslations(res.data.translations);
+    });
+  }, [setTranslations]);
 
   return (
     <Card>

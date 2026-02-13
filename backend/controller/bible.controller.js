@@ -65,11 +65,19 @@ export const getVerses = async (req, res) => {
 
 export const getRandomVerse = async (req, res) => {
   try {
-    const { translation = "web", scope = "" } = req.query;
-    const url = `https://bible-api.com/data/${translation}/random/${scope}`;
+    const { translation = "web", scope } = req.query;
+
+    let url = `https://bible-api.com/data/${translation}/random`;
+
+    // Only add scope if provided
+    if (scope) {
+      url += `/${scope}`;
+    }
+
     const data = await fetchFromBibleApi(url);
     res.json(data);
-  } catch {
+  } catch (error) {
+    console.error("Random verse error:", error.message);
     res.status(500).json({ message: "Failed to fetch random verse" });
   }
 };
